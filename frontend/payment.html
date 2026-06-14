@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment - SmartFold</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        .payment-page {
+            background: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .payment-card {
+            max-width: 480px;
+            width: 100%;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .order-brief {
+            background: rgba(37,99,235,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px dashed rgba(37,99,235,0.2);
+        }
+        .order-brief h3 {
+            margin-bottom: 8px;
+            color: var(--heading);
+        }
+        .amount-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-top: 12px;
+        }
+        .amount-row .total-label {
+            font-weight: 600;
+            color: var(--muted);
+        }
+        .amount-row .total-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .method-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .method-btn {
+            background: #f1f5f9;
+            border: 2px solid transparent;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--muted);
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .method-btn.active {
+            background: #fff;
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 4px 12px rgba(37,99,235,0.15);
+        }
+        .method-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+        .cc-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .cc-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--heading);
+        }
+        .pay-btn {
+            background: var(--gradient);
+            color: #fff;
+            padding: 16px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(37,99,235,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 8px;
+        }
+        .pay-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(37,99,235,0.4);
+        }
+    </style>
+</head>
+<body class="payment-page">
+    <div class="payment-card">
+        <header style="text-align:center;">
+            <h1 class="brand-heading">SmartFold Pay</h1>
+            <p class="muted">Complete your transaction securely</p>
+        </header>
+
+        <div class="order-brief">
+            <h3 id="order-id-label">Order #---</h3>
+            <p class="small-text muted">Estimated Processing Time: 2-3 Days</p>
+            <div class="amount-row">
+                <span class="total-label">Total to Pay</span>
+                <span class="total-value" id="amount-label">LKR 0.00</span>
+            </div>
+        </div>
+
+        <div class="method-tabs">
+            <button class="method-btn active" data-method="CREDIT_CARD">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                Card
+            </button>
+            <button class="method-btn" data-method="CASH">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/></svg>
+                Cash on Pickup
+            </button>
+        </div>
+
+        <form id="payment-form" class="cc-form">
+            <div class="form-group">
+                <label for="card-name">Cardholder Name</label>
+                <input type="text" id="card-name" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19" required>
+            </div>
+            <div class="cc-row">
+                <div class="form-group">
+                    <label for="card-expiry">Expiry Date</label>
+                    <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-cvv">CVV</label>
+                    <input type="password" id="card-cvv" placeholder="***" maxlength="3" required>
+                </div>
+            </div>
+            <button type="submit" id="pay-btn" class="pay-btn">Complete Payment</button>
+        </form>
+    </div>
+
+    <script type="module" src="./payment.js"></script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+﻿C:\Program Files\Android\Android Studio\jbr\bin\java.exe
+C:\Program Files\Java\jdk-17\bin\java.exe
+C:\Users\user\AppData\Local\jdk-11.0.2\bin\java.exe
